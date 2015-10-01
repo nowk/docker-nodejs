@@ -1,8 +1,30 @@
-FROM nowk/alpine-nodejs:4.1.0
+FROM phusion/baseimage:0.9.17
 MAINTAINER Yung Hwa Kwon <yung.kwon@damncarousel.com>
 
+ENV NODE_VERSION v4.1.1
+
+# install dependencies
+RUN apt-get update
+RUN apt-get install -y \
+	wget \
+	build-essential
+
+# get and unpack node installer
+RUN mkdir -p /opt && cd /opt \
+	&& wget https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.gz \
+	&& tar -zvxf node-$NODE_VERSION-linux-x64.tar.gz \
+	&& rm node-$NODE_VERSION-linux-x64.tar.gz
+
+# clean up
+RUN apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# add to PATH
+ENV PATH /opt/node-$NODE_VERSION-linux-x64/bin:$PATH
+
 # setup user so files written to /src are not written as root
-ONBUILD RUN adduser -D -u 1001 -g '' nodejs \
+ONBUILD RUN addgroup --gid 500 nodejs
+ONBUILD RUN adduser --disabled-password --uid 1001 --gid 500 --gecos '' nodejs \
 	&& mkdir -p /src \
 	&& chown -R nodejs:nodejs /src
 
