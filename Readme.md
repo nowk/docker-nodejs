@@ -1,28 +1,33 @@
-# nodejs-env:4.1.0
+# nodejs-env
 
-Node.js Enviroment Base Docker
+Node.js Docker environment
 
 *I refuse to install node.js on my machine.*
 
-## Setup
-
-To build the Docker image locally.
-
-    make
-
-Docker image gives you these on build.
-
-    ENV PATH=$PATH:/src/node_modules/.bin
-    USER nodejs
-    WORKDIR /src
-    VOLUME /src
-
-`/src` has been `chown`'d to user `nodejs`
-
 ## Usage
 
-    FROM nowk/nodejs-env:4.1.0
+    FROM nowk/nodejs-env:<VERSION>
 
-## License
+---
 
-MIT
+| Environment Vars |                         |
+| ------ | --------------------------------- |
+| PATH   | PATH=$PATH:/src/node_modules/.bin |
+
+---
+
+| Versions |
+| -------- |
+| v4.1.1   |
+
+*Commands are run as user `nodejs`.*
+
+## Example
+
+    FROM nowk/nodejs-env:v4.1.1
+
+    ---
+
+    docker build --rm -t mynodeproject .
+    docker -run -v $(pwd):/src --rm -it mynodeproject mocha --reporter spec
+
