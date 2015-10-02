@@ -4,8 +4,8 @@ MAINTAINER Yung Hwa Kwon <yung.kwon@damncarousel.com>
 ENV NODE_VERSION v4.1.1
 
 # install dependencies
-RUN apt-get update
-RUN apt-get install -y \
+RUN apt-get update \
+	&& apt-get install -y \
 	wget \
 	build-essential
 
