@@ -15,12 +15,12 @@ RUN mkdir -p /opt && cd /opt \
 	&& tar -xf node-$NODE_VERSION-linux-x64.tar.gz \
 	&& rm node-$NODE_VERSION-linux-x64.tar.gz
 
+# add to PATH
+ENV PATH /opt/node-$NODE_VERSION-linux-x64/bin:$PATH
+
 # clean up
 RUN apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# add to PATH
-ENV PATH /opt/node-$NODE_VERSION-linux-x64/bin:$PATH
 
 # setup user so files written to /src are not written as root
 ONBUILD RUN addgroup --gid 500 nodejs
