@@ -12,7 +12,7 @@ RUN apt-get update \
 # get and unpack node installer
 RUN mkdir -p /opt && cd /opt \
 	&& wget https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.gz \
-	&& tar -zvxf node-$NODE_VERSION-linux-x64.tar.gz \
+	&& tar -xf node-$NODE_VERSION-linux-x64.tar.gz \
 	&& rm node-$NODE_VERSION-linux-x64.tar.gz
 
 # clean up
