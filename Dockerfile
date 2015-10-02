@@ -1,6 +1,7 @@
 FROM phusion/baseimage:0.9.17
 MAINTAINER Yung Hwa Kwon <yung.kwon@damncarousel.com>
 
+ENV NODE_MAJOR v4.1
 ENV NODE_VERSION v4.1.1
 
 # install dependencies
@@ -39,3 +40,8 @@ ONBUILD WORKDIR /src
 # node_modules is installed into.
 ONBUILD VOLUME /src
 
+
+LABEL \
+	version=$NODE_VERSION \
+	os="linux" \
+	arch="amd64"
