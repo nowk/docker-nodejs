@@ -18,6 +18,7 @@ Node.js Docker environment
 
 | Versions |
 | -------- |
+| v0.10.26 |
 | v4.1.1   |
 
 *Commands are run as user `nodejs`.*
