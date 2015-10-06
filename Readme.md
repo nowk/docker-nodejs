@@ -20,12 +20,15 @@ Node.js Docker environment
 | -------- |
 | v0.10.26 |
 | v4.1.1   |
+| v4.1.2   |
+
+__v4.1.1 has know security issues, please use v4.1.2.__
 
 *Commands are run as user `nodejs`.*
 
 ## Example
 
-    FROM nowk/nodejs-env:v4.1.1
+    FROM nowk/nodejs-env:v4.1.2
 
     ---
 

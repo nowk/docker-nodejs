@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.9.17
 MAINTAINER Yung Hwa Kwon <yung.kwon@damncarousel.com>
 
 ENV NODE_MAJOR v4.1
-ENV NODE_VERSION v4.1.1
+ENV NODE_VERSION v4.1.2
 
 # install dependencies
 RUN apt-get update \
