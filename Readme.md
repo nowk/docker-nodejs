@@ -19,6 +19,7 @@ Node.js Docker environment
 | Versions |
 | -------- |
 | v0.10.26 |
+| v0.10.40 |
 | v4.1.1   |
 | v4.1.2   |
 
