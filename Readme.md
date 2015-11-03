@@ -1,12 +1,12 @@
-# nodejs-env
+> I refuse to install node.js on my machine.
 
-Node.js Docker environment
+# nodejs-base
 
-*I refuse to install node.js on my machine.*
+Node.js Docker base image
 
 ## Usage
 
-    FROM nowk/nodejs-env:<VERSION>
+    FROM nowk/nodejs-base:<VERSION>
 
 ---
 
@@ -14,23 +14,49 @@ Node.js Docker environment
 | ------ | --------------------------------- |
 | PATH   | PATH=$PATH:/src/node_modules/.bin |
 
----
-
 | Versions |
 | -------- |
-| v0.10.26 |
-| v0.10.40 |
-| v0.11.13 |
-| v4.1.1   |
 | v4.1.2   |
 
-__v4.1.1 has know security issues, please use v4.1.2.__
 
-*Commands are run as user `nodejs`.*
+# nodejs-env
+
+Node.js Docker environment
+
+
+## Usage
+
+    FROM nowk/nodejs-env:<VERSION>
+
+---
+
+| Environment Vars |                                   |
+| ---------------- | --------------------------------- |
+| PATH             | PATH=$PATH:/src/node_modules/.bin |
+
+
+| User   | UID  | SUDO  |
+| ------ | ---- | ----- |
+| nodejs | 1000 | FALSE |
+
+*Switching `USER` must be explicitly called.*
+
+
+| Volumes | Example        |
+| ------- | -------------- |
+| /src    | -v $(pwd):/src |
+
+
+| WORKDIR |
+| ------- |
+| /src    |
+
 
 ## Example
 
     FROM nowk/nodejs-env:v4.1.2
+
+    USER nodejs
 
     ---
 
