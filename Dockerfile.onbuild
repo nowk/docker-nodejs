@@ -6,8 +6,8 @@ MAINTAINER Yung Hwa Kwon <yung.kwon@damncarousel.com>
 ONBUILD RUN addgroup --gid 500 nodejs-grp
 ONBUILD RUN adduser --disabled-password --uid 1000 --gecos '' nodejs \
 	&& usermod -a -G nodejs-grp nodejs \
-	&& mkdir -p /src \
-	&& chown -R nodejs:nodejs /src
+	&& mkdir -p /src /.npm \
+	&& chown -R nodejs:nodejs /src /.npm
 
 # add node_modules bin to path
 ONBUILD ENV PATH=$PATH:/src/node_modules/.bin

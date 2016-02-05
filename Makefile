@@ -1,15 +1,25 @@
-default: build-all
+NAME=nowk/nodejs
+VERSION=v4.1.2
 
-NODE_VERSION=v4.1.2
+default: $(VERSION)
 
-build-docker-base:
-	docker build \
-		-f Dockerfile.base \
-		--rm -t nowk/nodejs-base:${NODE_VERSION} .
+base:
+	docker build -f Dockerfile.$@ --rm -t $(NAME)-$@:$(VERSION) .
 
-build-docker-env:
-	docker build \
-		-f Dockerfile.env \
-		--rm -t nowk/nodejs-env:${NODE_VERSION} .
+onbuild: base
+	docker build -f Dockerfile.$@ --rm -t $(NAME)-$@:$(VERSION) .
 
-build-all: build-docker-base build-docker-env
+$(VERSION): onbuild
+	docker build --rm -t $(NAME):$(VERSION) .
+
+
+push:
+	docker push $(NAME)-base:$(VERSION)
+	docker push $(NAME)-onbuild:$(VERSION)
+	docker push $(NAME):$(VERSION)
+
+.PHONY: push npm-shared-volume
+
+# npm-shared-volume creates a shared volume on the global node_modules
+npm-shared-volume:
+	docker run -v /opt/node/lib/node_modules --name npm$(VERSION) $(NAME):$(VERSION)

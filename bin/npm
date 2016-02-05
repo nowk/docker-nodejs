@@ -1,0 +1,9 @@
+#!/bin/sh
+# vim: set filetype=sh :
+set -e
+
+docker run --rm -t \
+	--volumes-from npmv4.1.2 \
+	-v $(pwd):/src \
+	-u $(id -u $(whoami)) \
+	--entrypoint /opt/node/bin/npm nowk/nodejs:v4.1.2 "$@"

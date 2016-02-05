@@ -1,32 +1,42 @@
 > I refuse to install node.js on my machine.
 
-# nodejs-base
+# nowk/nodejs
 
-Node.js Docker base image
+Node.js Docker
 
-## Usage
+---
+
+| Entrypoint | Cmd     |
+| ---------- | ------- |
+| node       | --help  |
+
+## Example
+
+    docker -run -v $(pwd):/src --rm -it nowk/nodejs:v4.1.2 --help
+
+
+---
+
+## -base
 
     FROM nowk/nodejs-base:<VERSION>
 
 ---
 
 | Environment Vars |                         |
-| ------ | --------------------------------- |
-| PATH   | PATH=$PATH:/src/node_modules/.bin |
+| ---------------- | --------------------------------- |
+| PATH             | PATH=$PATH:/src/node_modules/.bin |
 
 | Versions |
 | -------- |
 | v4.1.2   |
 
 
-# nodejs-env
+---
 
-Node.js Docker environment
+## -onbuild
 
-
-## Usage
-
-    FROM nowk/nodejs-env:<VERSION>
+    FROM nowk/nodejs-onbuild:<VERSION>
 
 ---
 
@@ -50,16 +60,4 @@ Node.js Docker environment
 | WORKDIR |
 | ------- |
 | /src    |
-
-
-## Example
-
-    FROM nowk/nodejs-env:v4.1.2
-
-    USER nodejs
-
-    ---
-
-    docker build --rm -t mynodeproject .
-    docker -run -v $(pwd):/src --rm -it mynodeproject mocha --reporter spec
 
