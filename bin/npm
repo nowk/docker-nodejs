@@ -2,7 +2,7 @@
 # vim: set filetype=sh :
 set -e
 
-docker run --rm -t \
+docker run --rm -it \
 	--volumes-from npmv4.1.2 \
 	-v $(pwd):/src \
 	-u $(id -u $(whoami)) \
