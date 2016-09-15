@@ -1,25 +1,10 @@
-NAME=nowk/nodejs
-VERSION=v4.1.2
-
-default: $(VERSION)
-
-base:
-	docker build -f Dockerfile.$@ --rm -t $(NAME)-$@:$(VERSION) .
-
-onbuild: base
-	docker build -f Dockerfile.$@ --rm -t $(NAME)-$@:$(VERSION) .
-
-$(VERSION): onbuild
-	docker build --rm -t $(NAME):$(VERSION) .
+NAME=node
+VERSION=5.12.0
 
 
-push:
-	docker push $(NAME)-base:$(VERSION)
-	docker push $(NAME)-onbuild:$(VERSION)
-	docker push $(NAME):$(VERSION)
-
-.PHONY: push npm-shared-volume
+.PHONY: npm-shared-volume
 
 # npm-shared-volume creates a shared volume on the global node_modules
+# NOTE the shared volume path may vary with each version
 npm-shared-volume:
-	docker run -v /opt/node/lib/node_modules --name npm$(VERSION) $(NAME):$(VERSION)
+	docker run -v /usr/local/lib/node_modules --entrypoint node --name npmv$(VERSION) $(NAME):$(VERSION) --version
