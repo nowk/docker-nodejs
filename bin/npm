@@ -2,15 +2,11 @@
 # vim: set filetype=sh :
 set -e
 
-VERSION=5.12.0
-DOCKER_IMAGE="node:$VERSION"
-
-# include _docker.sh
-. "$(dirname $0)/../lib/docker.sh/_docker.sh"
-
+# use the existing node executable and overwrite with additional arguments
 args=("${@}" -- -v ~/.ssh:/root.ssh --entrypoint /usr/local/bin/npm)
-node ${args[@]} # use the existing node executable and overwrite with additional arguments
+node ${args[@]}
 
+# NOTE just for reference
 # docker $(run_with --rm -it --volumes-from npmv${VERSION} \
 # 	-v ~/.ssh:/root/.ssh \
 # 	-v $(pwd):/usr/src \
