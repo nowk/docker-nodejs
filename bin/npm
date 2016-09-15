@@ -1,9 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 # vim: set filetype=sh :
 set -e
 
-docker run --rm -it \
-	--volumes-from npmv4.1.2 \
-	-v $(pwd):/src \
-	-u $(id -u $(whoami)) \
-	--entrypoint /opt/node/bin/npm nowk/nodejs:v4.1.2 "$@"
+VERSION=5.12.0
+DOCKER_IMAGE="node:$VERSION"
+
+# include _docker.sh
+. "$(dirname $0)/../lib/docker.sh/_docker.sh"
+
+args=("${@}" -- -v ~/.ssh:/root.ssh --entrypoint /usr/local/bin/npm)
+node ${args[@]} # use the existing node executable and overwrite with additional arguments
+
+# docker $(run_with --rm -it --volumes-from npmv${VERSION} \
+# 	-v ~/.ssh:/root/.ssh \
+# 	-v $(pwd):/usr/src \
+# 	-w /usr/src \
+# 	--entrypoint /usr/local/bin/npm)
+
