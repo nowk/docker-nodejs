@@ -10,7 +10,7 @@ Node.js Docker executable
 Create the shared volume to share global `node_modules` state across different 
 executables.
 
-    make npm-shared-volume
+    make node-shared-volume
 
 Add the contents of `bin` to your `$PATH`.
 

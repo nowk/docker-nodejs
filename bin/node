@@ -9,7 +9,7 @@ DOCKER_IMAGE="${NAME}:$VERSION"
 # include _docker.sh
 . "$(dirname $0)/../lib/docker.sh/_docker.sh"
 
-docker $(run_with --volumes-from npmv${VERSION} \
+docker $(run_with --volumes-from ${NAME}v${VERSION} \
 	-v=$(pwd):/usr/src \
 	-w=/usr/src \
 	--entrypoint node)
