@@ -2,8 +2,9 @@
 # vim: set filetype=sh :
 set -e
 
+NAME=node
 VERSION=5.12.0
-DOCKER_IMAGE="node:$VERSION"
+DOCKER_IMAGE="${NAME}:$VERSION"
 
 # include _docker.sh
 . "$(dirname $0)/../lib/docker.sh/_docker.sh"
