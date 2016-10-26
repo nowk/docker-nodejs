@@ -3,7 +3,13 @@
 set -e
 
 NAME=node
-VERSION=5.12.0
+# check for version for called directory else use the one that comes with 
+# docker-nodejs
+VERSION_FILE=$(pwd)/NODEJS_VERSION
+if [ ! -f $VERSION_FILE ] ; then
+	VERSION_FILE=$(dirname $(readlink -f $0))/../VERSION
+fi
+VERSION=$(cat $(readlink -f $VERSION_FILE))
 DOCKER_IMAGE="${NAME}:$VERSION"
 
 # include _docker.sh
