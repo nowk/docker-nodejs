@@ -9,7 +9,7 @@ DOCKER_IMAGE="node:$VERSION"
 . "$(dirname $0)/../lib/docker.sh/_docker.sh"
 
 docker $(run_with --volumes-from npmv${VERSION} \
-	-v $(pwd):/usr/src \
-	-w /usr/src \
+	-v=$(pwd):/usr/src \
+	-w=/usr/src \
 	--entrypoint /usr/local/bin/node)
 
