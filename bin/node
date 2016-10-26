@@ -11,5 +11,5 @@ DOCKER_IMAGE="node:$VERSION"
 docker $(run_with --volumes-from npmv${VERSION} \
 	-v=$(pwd):/usr/src \
 	-w=/usr/src \
-	--entrypoint /usr/local/bin/node)
+	--entrypoint node)
 

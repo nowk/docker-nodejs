@@ -3,7 +3,7 @@
 set -e
 
 # use the existing node executable and overwrite with additional arguments
-args=("${@}" -- --rm -v ~/.ssh:/root/.ssh --entrypoint /usr/local/bin/npm)
+args=("${@}" -- --rm -v ~/.ssh:/root/.ssh --entrypoint npm)
 node ${args[@]}
 
 # NOTE just for reference
